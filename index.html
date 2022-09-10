@@ -1,60 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Razor Computadores</title>
+    <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="img/logo razor favicon/favicons/favicon-16x16.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
 
-</head>
-<body>
+  <body>
+    <header>
+      <nav>
+        <a class="logo" href="#"><img src="img/logo razor.png" alt="Razor Computadores">Razor Computadores</a>
+        <div class="mobile-menu">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+          <li><a href="#">Início</a></li>
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Projetos</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
     <main>
-        <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">Razor Workstation</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Razor</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </nav>
-        </main>
-        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>    
-    
-</body>
+      <video width="1360" height=850" controls="controls" autoplay="autoplay">
+        <source src="videos/video página principal.mp4" type="video/mp4">
+        <object data="" width="1360" height="850">
+        <embed width="1360" height="850" src="videos/video página principal.mp4">
+        </object>
+        </video>
+    </main>
+    <script src="mobile-navbar.js"></script>
+  </body>
 </html>

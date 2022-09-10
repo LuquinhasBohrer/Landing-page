@@ -1,0 +1,265 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Free Video Converter: Convert video to HTML5</title>
+
+<style type="text/css">
+  html * { font-family:Tahoma;font-size:12px; }
+span.videoContainer{
+	display:block;
+	width:100%;
+	height: 100%;
+	padding: 20px auto 50px auto;
+	margin:auto;
+	position:relative;
+}
+  .leftArrow, .rightArrow {
+	cursor:pointer;
+	margin-bottom: 25px;
+}
+.rightArrow{
+}
+.leftArrow{
+}
+.leftArrow:hover, .rightArrow:hover{
+	color:#bbb;
+}
+#currentFilesLocation {
+	margin-right:8px;
+}
+#_a42a39e3db3942e8a95cfd6b2c417fca {
+    display: none;
+}
+</style>
+<!-- Загрузка JSON-->
+<script type='text/javascript'>
+    var model = {"CurrentFilesLocation":"Localização dos arquivos correntes:","CurrentFilesLocationDescription":"Todos os arquivos devem estar localizados na mesma pasta que a página html","MainTitle":"Para incorporar o vídeo na página da Web","NeedToShowAdv":true,"Title1":"Suba esses arquivos da pasta de saída para o servidor","Title2":"Copie este código","Title3":"Cole o código para sua página entre as tags","VideoDatas":[{"__type":"Html5VideoData:#ConverterCommon.Tools.Flash","FolderPath":"C:\\Users\\Lucas\\Desktop\\Programação\\Projetos aleatorios\\Landing-page\\videos\\video página principal","Height":360,"Href":"https:\/\/www.freemake.com\/free_video_converter\/","HrefText":"video converter","Width":640,"H264FileName":"[freemake.com LOGO] video página principal.mp4","TheoraFileName":"[freemake.com LOGO] video página principal.ogv","WebMFileName":"[freemake.com LOGO] video página principal.webm"}]}
+</script>
+
+<script type="text/javascript" src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/jquery-1.6.4.min.js"></script>
+
+<script>
+
+var listFiles;
+	
+function loadDatos() {   
+	listFiles = this.model.VideoDatas;
+	InsertText(this.model);
+	console.log(this.model);
+}
+function ShowArrow(){
+	if ($("video").attr("id")=="0"){
+		$(".leftArrow").hide();
+	}
+	else{
+		$(".leftArrow").show();
+	}
+	var maxIndex = listFiles.length -1;
+	var index = parseInt($("video").attr("id"));
+	if (index==maxIndex){
+		$(".rightArrow").hide();
+	}
+	else{
+		$(".rightArrow").show();
+	}
+}
+function InsertText(respText){
+	$("#mainTitle").text(respText.MainTitle);
+	$("#title1").text(respText.Title1);
+	$("#title2").text(respText.Title2);
+	$("#title3").text(respText.Title3);
+	
+	$("#currentFilesLocation").text(respText.CurrentFilesLocation);
+	$("#currentFilesLocationDescription").text(respText.CurrentFilesLocationDescription);
+	ShowVideo(0);
+}
+function ShowVideo(num){
+    var video = listFiles[num];
+    $("#videoContainer").empty();
+    var videoStr = "<div style=\"position: relative; width: " + video.Width + "px;\">\n" +
+        "<video id=" + num + " controls width=" + video.Width + " height=" + video.Height + ">\n" +
+        "<source src=\"" + video.TheoraFileName + "\" type='video/ogg; codecs=\"theora, vorbis\"'/>\n" +
+        "<source src=\"" + video.WebMFileName + "\" type='video/webm' >\n" +
+        "<source src=\"" + video.H264FileName + "\" type='video/mp4'>\n" +
+        "<p>Video is not visible, most likely your browser does not support HTML5 video</p>\n</video>\n";
+
+    if (this.model.NeedToShowAdv) videoStr +=
+        "<div id=\"_a42a39e3db3942e8a95cfd6b2c417fca\" style=\"color:blue;text-align:center;\">Download Youtube video with&nbsp;</div>\n" +
+        "<script type=\"text/javascript\">" +
+        	"(function () {" +
+        	    "var h = function() { " +
+        	        "var el = document.getElementById('_a42a39e3db3942e8a95cfd6b2c417fca');" +
+			        "var t = document.createElement('a');" +
+        	        "t.setAttribute('href', 'https://www.freemake.com/free_video_downloader/');" +
+                    "var f = false;" +
+                    "if (f) t.setAttribute('rel', 'nofollow');" +
+        	        "t.innerHTML = 'video downloader';" +
+        	        "t.style.cssText = \"font-family: 'Arial'; font-size: 12px; color:blue; top: 6px; left: 6px;border-style: none; line-height:8px\";" +		
+        	        "el.appendChild(t);" +
+        	    "};" +
+        	    "var ds = document.readyState;" +
+        	    "if(ds == 'interactive' || ds == 'complete') { h(); }" + 
+        	    "else " +
+        	        "document.onreadystatechange = function () {" +
+        	            "if (document.readyState == 'interactive') h();" +
+        	        "}" +
+        	"}());" +
+        "<\/script>";
+
+    videoStr += "<\/div>";
+	
+    $("#videoContainer").append(videoStr);
+
+    $("textarea").val(videoStr);
+	$("#folderPath").text(video.FolderPath);
+	$("#folderPath").attr("href", video.FolderPath);
+	
+	$("#listFiles").empty();
+	var filesStr = video.TheoraFileName+"<br/>"+video.WebMFileName+"<br/>"+video.H264FileName;
+
+	$("#listFiles").html(filesStr);
+	ShowArrow();
+}
+function NextVideos () {
+	var num = $("video").attr("id");
+	ShowVideo(parseInt(num)+1);
+}
+function PrevVideos () {
+	var num = $("video").attr("id");
+	ShowVideo(parseInt(num)-1);
+}
+
+</script>
+
+</head>
+
+<body onload="loadDatos();">
+
+<center>
+<table width=766 cellspacing=0 cellpadding=0>
+<tr>
+    <td height=109 style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/1.gif') no-repeat;" align=left>
+    <div id="mainTitle" style="font-family: 'Georgia', 'Times New Roman', Times, serif; color:#d24215; padding-right:121px; padding-top:35px; padding-left:50px; font-size:35px;">
+      </div>
+  </td>
+</tr>
+<tr>
+  <td style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/2.gif') no-repeat;vertical-align:middle;align:center;  background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/2-bottom.gif') no-repeat left bottom;" valign=middle align=center>
+  <table border="0" cellspacing="0" cellpadding="0" style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/2.gif') no-repeat 0px top; padding-top: 20px; padding-bottom: 45px;">
+      <tr>
+          <td width="100"> &nbsp; <img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/transparent.gif" width="100" height="1">
+              <div onclick="PrevVideos()" class="leftArrow">
+                  <img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/left.png">
+              </div></td>
+          <td align="center" valign="middle">
+              <span class="videoContainer">
+      <div id="videoContainer" style="color: #ffffff;">
+</div>
+    </span>
+          </td>
+          <td width="100" align="right">
+              &nbsp;<img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/transparent.gif" width="100" height="1">
+              <div onclick="NextVideos();" class="rightArrow">
+                  <img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/right.png">
+              </div>
+
+          </td>
+      </tr>
+</table></td>
+
+</tr>
+<tr>
+  <td height=182 style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/3.gif') no-repeat;vertical-align:top;" valign=top align=left>
+    <div id="title1" style="font-family: 'Georgia', 'Times New Roman', Times, serif;color:#13b8ba;padding-left:119px;padding-top:25px;font-size:20px;">
+      
+    </div>
+    <div style="padding-left:140px;padding-top:10px;">
+      <div id="listFiles">
+
+	  </div>
+      <div style="padding-top:16px;"><i id="currentFilesLocation" style="color:#AAAAAA"> </i><a id="folderPath" href="file:///E:\Video\Wildlife"></a></div>
+      <div style="padding-top:6px;"><i id="currentFilesLocationDescription" style="color:#AAAAAA"></i></div><br />
+    </div>
+  </td>
+</tr>
+<tr>
+  <td style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/4.gif') no-repeat;vertical-align:top;" valign=top align=left>
+    <div id="title2" style="font-family: 'Georgia', 'Times New Roman', Times, serif;color:#13b8ba;padding-left:119px;padding-top:19px;font-size:20px;">
+      
+    </div>
+
+    <table width=620 cellspacing=0 cellpadding=0 style="width:620px;position:relative;left:119px;top:20px;">
+    <tr><td style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/g1.gif') repeat-y;height:29px;" height=29>&nbsp;</td></tr>
+    <tr>
+      <td>
+        <table width=100% cellspacing=0 cellpadding=0 style="width:100%;">
+            <tr>
+                <td width=29 style="background: url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/gl.gif') repeat-y;">&nbsp;</td>
+                <td>
+
+                    <script type="text/javascript">
+                        function jFocus(elm) {
+                            if (typeof(elm) == 'string') elm = getElementById(elm);
+                            if (elm) {
+                                elm.focus();
+                                elm.select();
+                            }
+                        }
+
+                        function FitToContent(id, maxHeight) {
+                            var text = id && id.style ? id : document.getElementById(id);
+                            if (!text)
+                                return;
+
+                            var adjustedHeight = text.clientHeight;
+
+                            if (!maxHeight || maxHeight > adjustedHeight) {
+                                adjustedHeight = Math.max(text.scrollHeight, adjustedHeight);
+                                if (maxHeight)
+                                    adjustedHeight = Math.min(maxHeight, adjustedHeight);
+                                if (adjustedHeight > text.clientHeight)
+                                    text.style.height = adjustedHeight + "px";
+                            }
+                        }
+
+                    </script>
+
+                    <textarea id=ta name=ta rows=10 onclick="jFocus(this)" readonly style="width: 555px; font-size: 90%; border: none; overflow-y: scroll; display: inline-block;">
+			  </textarea>
+
+                    <script language="javascript">
+                        FitToContent(document.getElementById("ta"), 500);
+                    </script>
+
+                </td>
+                <td width=29 style="background: url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/gr.gif') repeat-y;">&nbsp;</td>
+            </tr>
+        </table>
+      </td>
+      
+    </tr>
+    <tr>
+      <td><img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/g2.gif" width=620 height=29></td>
+    </tr>
+    </table>
+
+
+  </td>
+</tr>
+<tr>
+  <td><img src="file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/gsh.gif" width=766 height=69></td>
+</tr>
+<tr>
+  <td height=108 style="background:url('file:///C:/Program Files (x86)/Freemake/Freemake Video Converter/FreemakeVideoConverter/ForFlash/5.gif') no-repeat;vertical-align:top;" valign=top align=left>
+  <div>
+    <span id="title3" style="font-family: 'Georgia', 'Times New Roman', Times, serif;color:#13b8ba;padding-left:119px;padding-top:19px;font-size:20px;"></span>
+    <span style="color:#7014c6;font-size:16px;font-family:'Courier New'">  &lt;body&gt;&lt;/body&gt;</span>
+    </div>
+  </td>
+</tr>
+</table>
+</center>
+
+</body>
+</html>
