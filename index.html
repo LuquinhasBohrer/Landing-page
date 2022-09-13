@@ -3,16 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://kit.fontawesome.com/734f64d929.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Razor Computadores</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="shortcut icon" href="img/logo razor favicon/favicons/favicon-16x16.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="img/logo razor favicon/favicons/favicon-16x16.png"
+      type="image/x-icon"
+    />
+
+    <style>
+     
+      </style>
   </head>
 
   <body>
     <header>
       <nav>
-        <a class="logo" href="#"><img src="img/logo razor.png" alt="Razor Computadores">Razor Computadores</a>
+        <a class="logo" href="#"><img src="img/logo razor.png" alt="Razor Computadores" />Razor Computadores</a>
         <div class="mobile-menu">
           <div class="line1"></div>
           <div class="line2"></div>
@@ -28,14 +37,39 @@
     </header>
 
     <main>
-      <video  controls="controls" autoplay="autoplay" class="video">
-        <source src="videos/video página principal.mp4" type="video/mp4">
+      <video  autoplay="autoplay" loop="loop" audio="none" class="video">
+        <source src="videos/video sem som.mp4" type="video/mp4" />
         <object data="" width="1360" height="850">
-        <embed width="1360" height="850" src="videos/video página principal.mp4">
+          <embed
+            width="1360"
+            height="850"
+            src="videos/PRODIGY_YOUTUBE.mp4"
+          />
         </object>
-        </video>
+      </video>
+
+      <section class="barra">
+        <ul>
+          <button></button><li><a class="active" href="#home">Home</a></li></button>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </section>
+      <section class="fundo">
+      </section>
     </main>
-  
+
+    <footer>
+      <ul>
+          <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+          <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+          <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href=""><i class="fa-brands fa-snapchat"></i></a></li>
+      </ul>
+      <p>Todos direitos reservados © Razor Computadores</p>
+  </footer>
+
     <script src="./js/mobile-navbar.js"></script>
   </body>
 </html>
