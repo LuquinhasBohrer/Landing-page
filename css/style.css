@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -134,10 +136,22 @@ main {
 }
 
 /*Título Principal*/
+.titulo-principal {
+  font-family: 'Permanent Marker', cursive;
+  background-image: linear-gradient(to bottom, rgb(118, 28, 209), rgb(82, 152, 209), rgb(82, 224, 210));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: black;
+}
+
 h1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  font-size: 100px;
+  font-weight: 600;
+}
+@media (max-width: 999px){
+  h1 {font-size: 50px;}
 }
 
 /*Footer*/
