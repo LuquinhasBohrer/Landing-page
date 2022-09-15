@@ -50,7 +50,7 @@ nav {
 }
 
 main {
-  margin-top: 0px;
+  margin-top: 0%;
   background-size: cover;
   height: 92vh;
 }
@@ -138,7 +138,7 @@ main {
 /*Título Principal*/
 .titulo-principal {
   font-family: 'Permanent Marker', cursive;
-  background-image: linear-gradient(to bottom, rgb(118, 28, 209), rgb(82, 152, 209), rgb(82, 224, 210));
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(15, 64, 104),rgb(18, 161, 147));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -149,6 +149,7 @@ h1 {
   text-align: center;
   font-size: 100px;
   font-weight: 600;
+  margin-bottom: 0%;
 }
 @media (max-width: 999px){
   h1 {font-size: 50px;}
