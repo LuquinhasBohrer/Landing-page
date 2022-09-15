@@ -3,26 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="https://kit.fontawesome.com/734f64d929.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">  
+    <script
+      src="https://kit.fontawesome.com/734f64d929.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Razor Computadores</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="style.css">
     <link
       rel="shortcut icon"
       href="img/logo razor favicon/favicons/favicon-16x16.png"
       type="image/x-icon"
     />
-
-    <style>
-     
-      </style>
   </head>
 
   <body>
     <header>
       <nav>
-        <a class="logo" href="#"><img src="img/logo razor.png" alt="Razor Computadores" />Razor Computadores</a>
+        <a class="logo" href="#"
+          ><img src="img/logo razor.png" alt="Razor Computadores" />Razor
+          Computadores</a
+        >
         <div class="mobile-menu">
           <div class="line1"></div>
           <div class="line2"></div>
@@ -31,58 +37,74 @@
         <ul class="nav-list">
           <li><a href="index.html">Início</a></li>
           <li><a href="./sobre/sobre.html">Sobre</a></li>
-          <li><a href="./projetos/projetos.html">Projetos</a></li>
           <li><a href="./contato/contato.html">Contato</a></li>
         </ul>
       </nav>
     </header>
 
-    
     <main>
-      <video  autoplay="autoplay" loop="loop" audio="none" class="video">
-        <source src="videos/video sem som.mp4" type="video/mp4" />
+      <video auto  autoplay="autoplay" preload="preload" loop="loop" class="video" muted>
+        <source src="videos/PRODIGY_YOUTUBE.mp4" type="video/mp4" />
         <object data="" width="1360" height="850">
           <embed
             width="1360"
             height="850"
-            src="videos/PRODIGY_YOUTUBE.mp4"
+            src="videos/video página principal.mp4"
           />
         </object>
       </video>
+      
+      <h1 class="titulo-principal">PRODIGY</h1>
 
-      <section class="barra">
-        <ul>
-          <button></button><li><a class="active" href="#home">Home</a></li></button>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-      </section>
-      <section class="fundo">
-      </section>
+      <div class="img-slider">
+        <div class="slide active">
+          <img src="img/prodigy1.webp" alt="">
+          <div class="info">
+           </div>
+        </div>
+        <div class="slide">
+          <img src="img/prodigy2.webp" alt="">
+          <div class="info">
+          </div>
+        </div>
+        <div class="slide">
+          <img src="img/prodigy3.webp" alt="">
+          <div class="info">
+           </div>
+        </div>
+        <div class="slide">
+          <img src="img/prodigy4.webp" alt="">
+          <div class="info">
+          </div>
+        </div>
+        <div class="navigation">
+          <div class="btn active"></div>
+          <div class="btn"></div>
+          <div class="btn"></div>
+          <div class="btn"></div>
+        </div>
+      </div>
     </main>
 
-
-    <!-- Começo da aprasentação do pc com todos dados de compra-->
-    <section>
-      
-    </section>
-    <!-- Fim -->
-
+    <script src="js/carrosel.js"></script>
+    <script src="./js/mobile-navbar.js"></script>
 
     <footer>
       <ul>
-          <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
-          <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
-          <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-          <li><a href=""><i class="fa-brands fa-snapchat"></i></a></li>
+        <li>
+          <a href="https://www.facebook.com/razorcomp/"><i class="fa-brands fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href="https://razor.com.br"><i class="fa-sharp fa-solid fa-globe"></i></a>
+        </li>
+        <li>
+          <a href="https://instagram.com/razor_computadores?igshid=YmMyMTA2M2Y="><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/company/razor-computadores-do-brasil/"><i class="fa-brands fa-linkedin"></i></a>
+        </li>
       </ul>
-      <p>Todos direitos reservados © Razor Computadores</p>
-  </footer>
-
-    <script src="./js/mobile-navbar.js"></script>
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
+      <p>Todos direitos reservados © Razor Computadores 2022</p>
+    </footer>
   </body>
 </html>
