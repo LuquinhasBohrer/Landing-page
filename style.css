@@ -3,20 +3,15 @@
   padding: 0;
 }
 
-
+//*Header*//
 a {
   color: #fff;
   text-decoration: none;
   transition: 0.3s;
-  text-transform: uppercase;
 }
 
 a:hover {
   opacity: 0.7;
-}
-
-.nav-list a:hover{
-  font-size: 18px;
 }
 
 header img {
@@ -33,22 +28,17 @@ header img {
   font-weight: 700;
 }
 
-.video{
-  width: 100%;
-}
-
 nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
   background: #000;
-  margin-bottom: 0px;
-  /* height: 8vh; */
+  height: 8vh;
 }
 
 main {
-  margin-top: 0px;
+  background: url("img/background.jpg") no-repeat center center;
   background-size: cover;
   height: 92vh;
 }
@@ -80,7 +70,6 @@ main {
   body {
     overflow-x: hidden;
   }
-
   .nav-list {
     position: absolute;
     top: 8vh;
@@ -94,12 +83,10 @@ main {
     transform: translateX(100%);
     transition: transform 0.3s ease-in;
   }
-
   .nav-list li {
     margin-left: 0;
     opacity: 0;
   }
-
   .mobile-menu {
     display: block;
   }
@@ -114,7 +101,6 @@ main {
     opacity: 0;
     transform: translateX(50px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -133,6 +119,11 @@ main {
   transform: rotate(45deg) translate(-5px, -7px);
 }
 
+/*Video*/
+main hr {
+  width: 1360px; height: 300px; background-color: #000000; border: none;
+}
+
 /*Título Principal*/
 h1 {
   display: flex;
@@ -141,9 +132,9 @@ h1 {
 }
 
 /*Footer*/
-footer {margin-top: 300px;  display: flex; flex-direction: column; background-color: #000000; padding: 50px 0px; align-items: center;}
+footer {display: flex; flex-direction: column; background-color: #000000; padding: 50px 0px; align-items: center;}
 footer ul {display: flex; margin-bottom: 25px;}
 footer ul li {margin-right: 10px;}
 footer ul li:last-child {margin-right: 0px;}
-footer ul li a {color: #ffffff; font-size: 2rem;}
-footer p { color: #ffffff; text-align: center; font-weight: 400;}
+footer ul li a {color: #2c2c2c; font-size: 2rem;}
+footer p { color: #2c2c2c; text-align: center;}

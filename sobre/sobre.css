@@ -1,8 +1,41 @@
+body {
+    background-color: rgb(184, 184, 184);
+}
+
+header a {
+    text-decoration: none;
+}
+
+
 .titulo{
     margin-top: 20px;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 1px 1px 0.09em rgb(54, 53, 53);
+}
+
+.fotos .grid {
+    width: 100%; 
+    display: flex; 
+    flex-wrap: wrap;
+}
+.fotos .grid li {
+    height: 300px; 
+    padding: 20px; 
+    border-radius: 4px; 
+    background-clip: content-box; 
+    background-size: cover; 
+    background-position: center;
+}
+.fotos .grid li.small {
+    flex-basis: 40%;
+}
+.fotos .grid li.large {
+    flex-basis: 60%;
+}
+@media ( max-width: 700px) {
+    .fotos .grid li.large {flex-basis: 100%;}
+    .fotos .grid li.small {flex-basis: 100%;}
 }
 
