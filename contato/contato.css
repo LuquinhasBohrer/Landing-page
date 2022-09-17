@@ -7,7 +7,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     font-size: .938rem;
-    background-color: #ff0000;
+    background-color: #b3aeae;
 }
 
 h3{
@@ -166,6 +166,10 @@ h3{
 
 footer {
     margin-top: 50px;
+}
+
+.midias a:hover{
+  padding: 15px;
 }
 
 footer ul{

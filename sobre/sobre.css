@@ -6,6 +6,9 @@ header a {
     text-decoration: none;
 }
 
+header a:hover{
+    color: rgb(147, 155, 155);
+}
 
 .titulo {
     margin: 15px 0 15px 0;
