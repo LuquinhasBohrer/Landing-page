@@ -7,7 +7,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     font-size: .938rem;
-    background-color: #c7a3ff;
+    background-color: #dddae2;
 }
 
 h3{
@@ -166,6 +166,14 @@ h3{
 
 footer {
     margin-top: 50px;
+}
+
+footer ul{
+  list-style: none;
+}
+
+footer p {
+  font-size: 22px;
 }
   
   
