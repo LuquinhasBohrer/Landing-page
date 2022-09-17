@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(184, 184, 184);
+    background-color: #dddae2;
 }
 
 header a {
@@ -7,35 +7,60 @@ header a {
 }
 
 
-.titulo{
-    margin-top: 20px;
+.titulo {
+    margin: 15px 0 15px 0;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 52px;
     text-shadow: 1px 1px 0.09em rgb(54, 53, 53);
 }
 
 .fotos .grid {
-    width: 100%; 
-    display: flex; 
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
 }
+
 .fotos .grid li {
-    height: 300px; 
-    padding: 20px; 
-    border-radius: 4px; 
-    background-clip: content-box; 
-    background-size: cover; 
+    height: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    background-clip: content-box;
+    background-size: cover;
     background-position: center;
 }
+
 .fotos .grid li.small {
     flex-basis: 40%;
-}
-.fotos .grid li.large {
-    flex-basis: 60%;
-}
-@media ( max-width: 700px) {
-    .fotos .grid li.large {flex-basis: 100%;}
-    .fotos .grid li.small {flex-basis: 100%;}
+    list-style: none;
 }
 
+.fotos .grid li.large {
+    flex-basis: 60%;
+    list-style: none;
+}
+
+@media (max-width: 700px) {
+    .fotos .grid li.large {
+        flex-basis: 100%;
+    }
+
+    .fotos .grid li.small {
+        flex-basis: 100%;
+    }
+}
+
+.midias a:hover{
+    color: rgb(147, 155, 155);
+    /* font-size: 33px; */
+    padding: 15px;
+}
+
+footer ul{
+    list-style: none;
+}
+
+footer p {
+    font-size: 22px;
+}
