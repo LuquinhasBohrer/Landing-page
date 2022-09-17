@@ -1,52 +1,49 @@
-<<<<<<< HEAD
-.img-slider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 600px;
-  height: 900px;
-  margin: 10px;
-=======
+
 /*Informações sobre o pc*/
-.pc h2 {
+.informações-pc h2 {
   display: inline-block;
   vertical-align: text-top;
   margin-left: 900;
   align-items: center;
-  margin-left: 350px;
+  margin-left: 250px;
   font-size: 40px;
+  font-weight: bold;
 }
 
-.pc hr {
-  width: 100px;
-  margin-left: 400px;
-  font-weight: 400;
-  background-color: #000000;
-}
 
-.pc ul {
-  display: inline-block;
-  align-items: center;
+.informações-pc ul {
+  display: flex;
+  flex-direction: column;
   font-size: 30px;
-  color: #494949;
+  color: #888888;
   list-style: none;
   float: right;
   margin-top: 15px;
+  margin-right: 200px;
+  float: right;
 }
 
-.pc ul li {
+.informações-pc ul li {
   padding-bottom: 5px;
 }
 
-.pc ul li img {
+.informações-pc ul li img {
+  float: left;
   float: left;
   size: 50px;
+  color: #888888;
+  width: 50px;
+  height: 50px;
+  margin-right: 150px;
+}
+@media (max-width: 999px) {
+  .informações-pc h2 {
+    display: flex;
+    flex-direction: ;
+  }
 }
 
-
-
+/*slider*/
 .img-slider{
     float: left;
     display: flex;
@@ -59,8 +56,6 @@
     margin: 10px;
     display: inline-block;
     flex-direction: column-reverse;
->>>>>>> d2c85c483136031a6692f10ddcaea846000ef379
-
 }
 
 .img-slider .slide {
@@ -109,7 +104,7 @@
   z-index: 2;
   position: absolute;
   display: flex;
-  bottom: 30px;
+  bottom: 230px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -131,8 +126,11 @@
 
 @media (max-width: 820px) {
   .img-slider {
+    display: flex;
     width: 600px;
     height: 375px;
+    align-items: center;
+    justify-content: center;
   }
 
   .img-slider .slide .info {
@@ -213,12 +211,34 @@
   }
 }
 
+/*Botão adicionar ao carrinho*/
+.comprar {
+  width: 300px;
+  height: 70px;
+  border-radius: 1000px;
+  background: linear-gradient(to bottom, rgb(137, 15, 252), rgb(194, 37, 241));
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  float: right;
+  margin-top: 50px;
+  margin-right: 300px;
+  font-weight: bold;
+  border: #444444;
+}
+.comprar img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+
 
 
 /*Footer*/
-<<<<<<< HEAD
 footer {
-  margin-top: 1250px;
+  margin-top: 1200px;
   display: flex;
   flex-direction: column;
   background-color: #000000;
@@ -256,14 +276,3 @@ footer p {
   footer {
     margin-top: 400px;
   }
-=======
-footer {margin-top: 1350px;  display: flex; flex-direction: column; background-color: #000000; padding: 50px 0px; align-items: center;}
-footer ul {display: flex; margin-bottom: 25px;}
-footer ul li {margin-right: 10px;}
-footer ul li:last-child {margin-right: 0px;}
-footer ul li a {color: #ffffff; font-size: 2rem;}
-footer p { color: #ffffff; text-align: center; font-size: 22px; }
-@media (max-width: 999px){
-    footer{margin-top: 400px;}
->>>>>>> d2c85c483136031a6692f10ddcaea846000ef379
-}

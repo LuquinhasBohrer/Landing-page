@@ -59,6 +59,10 @@ main {
   list-style: none;
   display: flex;
 }
+.nav-list img {
+  width: 20px;
+  height: 20px;
+}
 
 .nav-list li {
   letter-spacing: 3px;
@@ -138,7 +142,7 @@ main {
 /*Título Principal*/
 .titulo-principal {
   font-family: 'Permanent Marker', cursive;
-  background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(15, 64, 104),rgb(18, 161, 147));
+  background-color: #000;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

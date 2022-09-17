@@ -1,0 +1,768 @@
+/*Não é carrinho, checkout e obrigado*/
+if (!document.body.classList.contains('woocommerce-cart') && !document.body.classList.contains('woocommerce-checkout') && !document.body.classList.contains('woocommerce-thankyou-order-received') && !document.body.classList.contains('woocommerce-order-received')) {
+	/*Controle da pesquisa do menu principal e troca de ícones*/
+	var pesquisaDiv = document.querySelector('.pesquisa-site');
+	function togglePesquisa(){
+		/*Foco no campo de pesquisa*/
+		document.getElementById('pesquisa-site-input').focus();
+		if (pesquisaDiv.classList.contains('aberta')) {
+			/*Remove foco no campo de pesquisa se fechar*/
+			document.getElementById('pesquisa-site-input').blur();
+		}
+		pesquisaDiv.classList.toggle('aberta');
+	}
+	function fechaPesquisa(){
+		pesquisaDiv.classList.remove('aberta');
+		document.querySelector('.pesquisa-site-botao').classList.remove('fechar');
+		document.querySelector('.pesquisa-site-botao-desktop').classList.remove('fechar');
+		document.getElementById('pesquisa-site-input').blur();
+	}
+	function trocaIconePesquisa(){
+		document.querySelector('.pesquisa-site-botao').classList.toggle('fechar');
+		document.querySelector('.pesquisa-site-botao-desktop').classList.toggle('fechar');
+	}
+	if (document.body.classList.contains('wp-is-mobile')) {
+		/*Controle do menu mobile e troca de ícones*/
+		var menu = new MmenuLight(document.querySelector( '#menu-mobile' ), 'all');
+		var navigator = menu.navigation({
+			title: '',
+		});
+		var drawer = menu.offcanvas();
+		var aberto = false;
+		document.querySelector( 'a[href="#menu-mobile"]' ).addEventListener( 'click', event => {
+			event.preventDefault();
+			if (aberto == false) {
+				drawer.open();
+				aberto = true;
+			} else {
+				drawer.close();
+				aberto = false;
+			}
+			document.querySelector( 'a[href="#menu-mobile"]' ).classList.toggle('aberto');
+		});
+		function pesquisaFechaMenuMobile(){
+			if (aberto == true) {
+				drawer.close();
+				aberto = false;
+				document.querySelector( 'a[href="#menu-mobile"]' ).classList.remove('aberto');
+			}
+		}
+		/*Libera o meu mobile depois de tudo já ter carregado*/
+		document.addEventListener("DOMContentLoaded", function(){
+			document.querySelector('#menu-mobile-botao').style.display = "block";
+			document.querySelector('#menu-mobile').style.display = "block";
+		});
+	}
+}
+/*Single product ou carrinho*/
+if (document.body.classList.contains('single-product') || document.body.classList.contains('woocommerce-cart')) {
+	/*Máscara para campo de telefone do formulário de baixar orçamento*/
+	jQuery('#baixar-orcamento-telefone').mask('(00) 0000-00000');
+	/*Pega as modais*/
+	var modalOrcamentoPasso1 = new bootstrap.Modal(document.getElementById('modal-orcamento-passo-1'));
+	var modalOrcamentoPasso2 = new bootstrap.Modal(document.getElementById('modal-orcamento-passo-2'));
+	var modalOrcamentoPasso3 = new bootstrap.Modal(document.getElementById('modal-orcamento-passo-3'));
+	/*Salva o e-mail do usuário quando clica no submit do formulário*/
+	var emailOrcamento = '';
+	document.addEventListener( 'wpcf7submit', function( event ) {
+		emailOrcamento = jQuery('#baixar-orcamento-email').val();
+	}, false );
+	/*Quando envia o formulário de baixar orçamento com sucesso, fecha o passo 1 e abre o 2*/
+	document.addEventListener( 'wpcf7mailsent', function( event ) {
+		modalOrcamentoPasso1.hide();
+		modalOrcamentoPasso2.show();
+	}, false );
+}
+
+/*Single product*/
+if (document.body.classList.contains('single-product')) {
+	/*Quando clica no botão comprar da barra superior ou no da primeira seção da página, na verdade, clica no botão de compra "oficial"*/
+	document.querySelectorAll('.botao-comprar').forEach(item => {
+		item.addEventListener('click', event => {
+			event.preventDefault();
+			document.querySelector('.single_add_to_cart_button').click();
+		})
+	});
+	/*Quando clica no botão de baixar orçamento*/
+	document.getElementById('orcamento-baixar-pdf').addEventListener("click", event => {
+		event.preventDefault();
+		modalOrcamentoPasso2.hide();
+		/*Envia o form orcamento-single-product-form*/
+		document.getElementById('enviar-form-personalizacao').click();
+	});
+	/*Quando clica em enviar orçamento por e-mail*/
+	function enviarPDF(url, email){
+		/*Pega o e-mail do usuário e inclui no formulário*/
+		document.getElementById("emailorcamento").value = emailOrcamento;
+		/*Envia o form orcamento-single-product-form*/
+		document.getElementById('enviar-form-personalizacao').click();
+		/*Fecha o passo 2 e abre o 3*/
+		modalOrcamentoPasso2.hide();
+		modalOrcamentoPasso3.show();
+	}
+	/*Botão que abre a seção de personalização*/
+	jQuery("#botao-personalizacao").click(function(event){
+		event.preventDefault();
+		if (jQuery("#personalizacao").hasClass("aberto")) {
+			jQuery("#personalizacao").removeClass("aberto");
+		} else {
+			jQuery("#personalizacao").addClass("aberto");
+			jQuery('html, body').animate({
+				scrollTop: jQuery("#barra-superior-single-product").offset().top
+			}, 50);
+		}
+	});
+	/*Barra superior*/
+	var targetOffset = jQuery("#barra-superior-single-product").offset().top + 5;
+	var $w = jQuery(window).scroll(function(){
+		if ( $w.scrollTop() > targetOffset ) {   
+			jQuery('#barra-superior-single-product').addClass("visivel");
+		} else {
+			jQuery('#barra-superior-single-product').removeClass("visivel");
+		}
+	});
+}
+/*Carrinho*/
+if (document.body.classList.contains('woocommerce-cart')) {
+	/*Abre detalhes do produto*/
+	document.querySelectorAll('.carrinho-produto-componentes .titulo').forEach(item => {
+		item.addEventListener('click', event => {
+			item.nextSibling.nextSibling.classList.toggle('aberta');
+		})
+	});
+	/*Quando clica em enviar orçamento por e-mail*/
+	function enviarPDF(url, email){
+		/*Pega a janela e abre ela*/
+		var janelaPDF = window.open(url + '&email=' + email, '_blank');
+		modalOrcamentoPasso2.hide();
+		modalOrcamentoPasso3.show();
+	}
+	/*Quando clica no botão de baixar orçamento*/
+	document.getElementById('orcamento-baixar-pdf').addEventListener("click", event => {
+		/*Evita alinhar ao topo pelo href="#"*/
+		event.preventDefault();
+		/*Fecha o passo 2*/
+		modalOrcamentoPasso2.hide();
+		/*Baixa o PDF abrindo a URL de geração em uma nova página, fechando automaticamente depois de gerado*/
+		window.open(urlPDF, '_blank');
+	});
+	/*Desabilita o diminuidor de quantidade de produto no carrinho quando a quantia atual for 1*/
+	jQuery('.minus').each(function(){
+		var quantia = jQuery(this).closest('.quantity').find( '.qty');
+		var quantiaAtual = parseFloat(quantia.val());
+		if (quantiaAtual == 1) {
+			jQuery(this).css('color','#999999');
+			jQuery(this).css('pointer-events','none');
+		}
+	});
+	/*Modal confirmando remoção de produto do carrinho*/
+	var removerSim = 0;
+	var removerClicado = "";
+	jQuery(".remove").click(function(event){
+		if (removerSim == 0) {
+			removerClicado = jQuery(this);
+			event.preventDefault();
+			event.stopPropagation();
+			jQuery('#modal-remover-produto-do-carrinho').modal('show');
+		} 
+	});
+	jQuery('#cepCorreios').val(jQuery('#cepCadastro').val());
+	buscaprazo();
+}
+
+/*Checkout*/
+if (document.body.classList.contains('woocommerce-checkout') && !document.body.classList.contains('woocommerce-thankyou-order-received') && !document.body.classList.contains('woocommerce-order-received')) {
+	/*Coloca as labels como placeholders nos campos do formulário de login - tem o mesmo código na página minha-conta*/
+	jQuery('#username').attr('placeholder', jQuery('label[for=username]').text());
+	jQuery('#password').attr('placeholder', jQuery('label[for=password]').text());
+	var hubspot = true;
+	/*Controle do conteúdo das abas no checkout*/
+	function abaAtual(nomeAba){
+		if (nomeAba == "pagamento") {
+			jQuery('.indentificacao-on').hide();
+			jQuery('.indentificacao-off').show();
+			jQuery('.pagamento-off').hide();
+			jQuery('.pagamento-on').show();
+			jQuery('#customer_details').hide();
+			jQuery('.resumo').show();
+			jQuery('#order_review').show();
+			jQuery('#checkout-coluna-cadastro-e-pagamento').removeClass('col-lg-8').addClass('col-lg-12');
+			jQuery('#checkout-coluna-login').hide();
+			/*Envia as informações do cliente para a hubspot*/
+			/*Tem que dar focus depois do preenchimento de cada campo pois assim dispara a validação do hubspot, senão o envio falha*/
+			if (hubspot && !jQuery('#billing_email').val() == '' && !jQuery('#billing_first_name').val() == '') {
+				jQuery('#email-bd2a7bad-0746-4da6-b3ba-d6021eba2097').val(jQuery('#billing_email').val());
+				jQuery('#email-bd2a7bad-0746-4da6-b3ba-d6021eba2097').focus();
+				jQuery('#firstname-bd2a7bad-0746-4da6-b3ba-d6021eba2097').val(jQuery('#billing_first_name').val());
+				jQuery('#firstname-bd2a7bad-0746-4da6-b3ba-d6021eba2097').focus();
+				jQuery('#lastname-bd2a7bad-0746-4da6-b3ba-d6021eba2097').val(jQuery('#billing_last_name').val());
+				jQuery('#lastname-bd2a7bad-0746-4da6-b3ba-d6021eba2097').focus();
+				jQuery('#phone-bd2a7bad-0746-4da6-b3ba-d6021eba2097').val(jQuery('#billing_phone').val().replace(/\D/g, ''));
+				jQuery('#phone-bd2a7bad-0746-4da6-b3ba-d6021eba2097').focus();
+				jQuery('#zip-bd2a7bad-0746-4da6-b3ba-d6021eba2097').val(jQuery('#billing_postcode').val().replace(/\D/g, ''));
+				jQuery('#zip-bd2a7bad-0746-4da6-b3ba-d6021eba2097').focus();
+				/*Envia*/
+				jQuery('.hs-button').click();
+				/*Só envia no primeira vez que executa*/
+				hubspot = false;
+			}
+		} else {
+			jQuery('.indentificacao-on').show();
+			jQuery('.indentificacao-off').hide();
+			jQuery('.pagamento-off').show();
+			jQuery('.pagamento-on').hide();
+			jQuery('#customer_details').show();
+			jQuery('.resumo').hide();
+			jQuery('#order_review').hide();
+			jQuery('#checkout-coluna-cadastro-e-pagamento').addClass('col-lg-8').removeClass('col-lg-12');
+			jQuery('#checkout-coluna-login').show();
+		}
+
+	}
+	abaAtual("identificacao");
+	/*Quando clica no botão FINALIZAR COMPRA, clica no botão real de compra, que está escondido*/
+	document.getElementById('botao-pagamento').addEventListener("click", event => {
+		event.preventDefault();
+		document.getElementById('place_order').click();
+	});
+}
+
+/*Minha conta*/
+if (document.body.classList.contains('woocommerce-account')) {
+	/*Coloca as labels como placeholders nos campos do formulário de login*/
+	jQuery('#username').attr('placeholder', jQuery('label[for=username]').text());
+	jQuery('#password').attr('placeholder', jQuery('label[for=password]').text());
+	jQuery('#reg_email').attr('placeholder', jQuery('label[for=reg_email]').text());
+	jQuery('#reg_password').attr('placeholder', jQuery('label[for=reg_password]').text());
+}
+
+/*Blog Single*/
+if (document.body.classList.contains('single-post')) {
+	/*Remove ps e spans que não tem conteúdo do corpo do post*/
+	document.querySelectorAll('p, p > span').forEach(item => {
+		if (item.innerHTML == '&nbsp;') {
+			item.remove();
+		}
+	})
+	/*Barra de progresso de leitura*/
+	document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("scroll", function() {
+			getProgress();
+		});
+		function getProgress() {
+			/*O quanto já rolou desde o topo*/
+			var topPos = window.pageYOffset;
+			/*O quanto ainda falta rolar pra chegar nos comentários*/
+			var remaining = document.querySelector('#comentarios').offsetTop - window.innerHeight;
+			/*Calculo e aplicacão da largura da barra no elemento*/
+			var percentage = (topPos / remaining) * 100;
+			document.querySelector(".barra-de-progesso-de-leitura").style.width = percentage + "%";
+		}
+	});
+	/*Anúncios*/
+	var elementoAnuncio = document.querySelector('#blog-anuncio-topo-fechar');
+	// Teste se o elemento existe, ou seja, se existe anúncio para essa categoria do post
+	if (typeof(elementoAnuncio) != 'undefined' && elementoAnuncio != null) {
+		document.querySelector('#blog-anuncio-topo-fechar').addEventListener('click', event => {
+			document.querySelector('#blog-anuncio-topo-div').style.display = "none";
+			document.querySelector('#blog-anuncio-post-div').style.display = "block";
+		});
+	}
+}
+
+/*NÃO Blog Single*/
+// if (!document.body.classList.contains('single-post')){
+	/*Barra Anúncio com cookie de 1 dia*/
+	// if(localStorage.razorCookieBarraAnuncio){
+	// 	dataCookieBarra = new Date();
+	// 	dataCookieBarra = dataCookieBarra.setHours(0,0,0,0);
+	// 	if(localStorage.razorCookieBarraAnuncio != dataCookieBarra){
+	// 		document.querySelector('#barra-anuncio').style.display = "block"; 
+	// 	}
+	// } else {
+	// 	document.querySelector('#barra-anuncio').style.display = "block";
+	// }
+	/*Barra Seja Sócio fechar*/
+// 	document.querySelector('#barra-anuncio-fechar').addEventListener('click', event => {
+// 		document.querySelector('#barra-anuncio').style.display = "none";
+// 		dataCookieBarra = new Date();
+// 		dataCookieBarra = dataCookieBarra.setHours(0,0,0,0);
+// 		localStorage.razorCookieBarraAnuncio = dataCookieBarra;
+// 	});
+// }
+
+/*Scripts postergados para depois que a DOM carregar*/
+window.requestIdleCallback = window.requestIdleCallback || function (cb) {
+	return setTimeout(function () {
+		var start = Date.now();
+		cb({ 
+			didTimeout: false,
+			timeRemaining: function () {
+				return Math.max(0, 50 - (Date.now() - start));
+			}
+		});
+	}, 1);
+}
+function idleWrapper() {
+	/*Remove avisos do woocommerce depois de 4 segundos*/
+	if (jQuery('.woocommerce-notices-wrapper').length > 0) {
+		setTimeout( function(){ 
+			jQuery('.woocommerce-notices-wrapper').remove();
+		}, 4000);
+	}
+	/*Typeform*/
+	var qs, js, q, s, d = document,
+	gi = d.getElementById,
+	ce = d.createElement,
+	gt = d.getElementsByTagName,
+	id = "typef_orm_share",
+	b = "https://embed.typeform.com/";
+	if (!gi.call(d, id)) {
+		js = ce.call(d, "script");
+		js.id = id;
+		js.src = b + "embed.js";
+		q = gt.call(d, "script")[0];
+		q.parentNode.insertBefore(js, q)
+	}
+	/*Hotjar*/
+	(function(h,o,t,j,a,r){
+		h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+		h._hjSettings={hjid:2735805,hjsv:6};
+		a=o.getElementsByTagName('head')[0];
+		r=o.createElement('script');r.async=1;
+		r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+		a.appendChild(r);
+	})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	/*Hubspot*/
+	var script = document.createElement('script');
+	script.src = 'https://js.hs-scripts.com/6240788.js';
+	script.id = 'hs-script-loader';
+	jQuery("body").append(script);
+	if (document.body.classList.contains('single-post')) {
+		/*Disqus*/
+		var script2 = document.createElement('script');
+		script2.src = 'https://razor-com-br.disqus.com/count.js';
+		script2.id = 'dsq-count-scr';
+		jQuery("body").append(script2);
+	}
+	/*Esconder indicadores se carrossel só possui um slide*/
+	if (jQuery('.flickity-enabled').length > 0) {
+		jQuery('.flickity-page-dots li:only-of-type').parent().css('opacity','0');
+	};
+	/*Single product*/
+	if (document.body.classList.contains('single-product')) {
+		/*Modal single product com cookie de 1 dia - Tem que ser aqui senão dá erro na modal do bootstrap*/
+		/*if(localStorage.razorCookieSingleProduct){
+			dataCookieSingleProduct = new Date();
+			dataCookieSingleProduct = dataCookieSingleProduct.setHours(0,0,0,0);
+			if(localStorage.razorCookieSingleProduct != dataCookieSingleProduct){
+				jQuery('#modal-single-product').modal('show');
+			}
+		} else {
+			jQuery('#modal-single-product').modal('show');
+		}*/
+		/*Modal single product fechar*/
+		/*document.querySelector('#modal-single-product-fechar').addEventListener('click', event => {
+			dataCookieSingleProduct = new Date();
+			dataCookieSingleProduct = dataCookieSingleProduct.setHours(0,0,0,0);
+			localStorage.razorCookieSingleProduct = dataCookieSingleProduct;
+		});*/
+		/*Cria HTML para aguardar valores da personalização*/
+		seletores = jQuery('select[class^="component_options_"]');
+		seletores.each(function() {
+			var idSeletor = jQuery(this).attr('id');
+			var idSeletorNumeros = idSeletor.replace(/[^0-9]/g, '');
+			var componenteTitulo = jQuery('#component_'+idSeletorNumeros+' .component_title_wrapper h2 .component_title_text').text();
+			var componenteTituloSlug = componenteTitulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+			var componenteTituloSlug = componenteTituloSlug.toLowerCase();
+			var componenteTituloSlug = componenteTituloSlug.replace(/\s/g, "-");
+			jQuery('#enviar-form-personalizacao').before('<textarea readonly="readonly" name="'+componenteTituloSlug+'" class="titulo">'+componenteTitulo+'</textarea>');
+			var idComponente = jQuery(this).val();
+			if (idComponente == 154) {
+				/*Componente "Não preciso disso"*/
+				jQuery('#enviar-form-personalizacao').before('<textarea readonly="readonly" name="'+componenteTituloSlug+'-opcao"  class="opcao '+componenteTituloSlug+' '+idSeletor+'">Não preciso disso</textarea>');
+			} else {
+				var valorSeletor = jQuery(this).children(':selected').text();
+				jQuery('#enviar-form-personalizacao').before('<textarea readonly="readonly" name="'+componenteTituloSlug+'-opcao"  class="opcao '+componenteTituloSlug+' '+idSeletor+'">'+valorSeletor+'</textarea>');
+			}
+			/*Altura automática conforme tamanho do texto*/
+			jQuery('#orcamento-single-product-form textarea').each(function(){
+				jQuery(this).css("height","1px");
+				jQuery(this).css("height", jQuery(this).prop("scrollHeight"));
+			});
+		});
+		/*Copia o preço total*/
+		setTimeout(function() {
+			var novoPrecoProduto = jQuery('#single-product-1 .price .amount').text();
+			jQuery('#precoproduto').val(novoPrecoProduto);
+		}, 3000);
+		/*Altera os valores criados acima caso o usuário use a personalização e salva o novo valor total do produto a cada personalização*/
+		seletores.change(function() {
+			var idSeletor = jQuery(this).attr('id');
+			var idComponente = jQuery(this).val();
+			if (idComponente == 154) {
+				/*Componente "Não preciso disso"*/
+				jQuery('.'+idSeletor).val('Não preciso disso');
+			} else {
+				var valorSeletor = jQuery(this).children(':selected').text();
+				jQuery('.'+idSeletor).val(valorSeletor);
+			}
+			/*Copia o preço total*/
+			setTimeout(function() {
+				var novoPrecoProduto = jQuery('#single-product-1 .price .amount').text();
+				jQuery('#precoproduto').val(novoPrecoProduto);
+			}, 1500);
+			/*Altura automática conforme tamanho do texto*/
+			jQuery('#orcamento-single-product-form textarea').each(function(){
+				jQuery(this).css("height","1px");
+				jQuery(this).css("height", jQuery(this).prop("scrollHeight"));
+			});
+		});
+	}
+	if (document.body.classList.contains('woocommerce-checkout') && !document.body.classList.contains('woocommerce-thankyou-order-received') && !document.body.classList.contains('woocommerce-order-received')) {
+		jQuery('#billing_address_1').attr('placeholder','Rua');
+		jQuery('#shipping_address_1').attr('placeholder','Rua');
+	}
+}
+window.requestIdleCallback(idleWrapper, {timeout: 10000});
+
+/*Página produtos*/
+if (document.body.classList.contains('page-template-template-produtos')){
+	/*Controle das máquinas selecionadas para comparação*/
+	var contador = 0;
+	var idsComparacao = [];
+	jQuery('input[id^="comparar_"]').each(function(){
+		if(this.checked){
+			idsComparacao[contador] = this.value;
+			contador++;
+		}
+	});
+	jQuery('input[id^="comparar_"]').on('change', function(){
+		contador = 0;
+		idsComparacao = [];
+		jQuery('input[id^="comparar_"]').each(function(){
+			if(this.checked){
+				idsComparacao[contador] = this.value;
+				contador++;
+			}
+		});
+		if (contador <= 1) {
+			document.querySelector('#botao-comparar-div').classList.remove('aberto');
+		} else {
+			document.querySelector('#botao-comparar-div').classList.add('aberto');
+		}
+	});
+	function enviarComparacao() {
+		idsComparacao = JSON.stringify(idsComparacao);
+		window.open('../comparacao?params='+idsComparacao,'_self');
+	}
+	/*Filtros escondidos no mobile*/
+	if (document.body.classList.contains('wp-is-mobile')) {
+		document.querySelector('.filtros-titulo').addEventListener('click', event => {
+			document.querySelector('.filtros-titulo').classList.toggle('aberto');
+			document.querySelector('.filtros-coluna').classList.toggle('aberto');
+		});
+	}
+	/*Filtro de preço*/
+	/*Pega os preços e tranforma em numeral*/
+	var precoMin = jQuery('#amountMin').attr('data-minimo');
+	precoMin = parseInt(precoMin, 10);
+	var precoMax = jQuery('#amountMin').attr('data-maximo');
+	precoMax = parseInt(precoMax, 10);
+	/*Variáveis usadas para colocar os valores na URL*/
+	var precoMinFiltro = precoMin;
+	var precoMaxFiltro = precoMax;
+	/*Se os valores estiverem vazios, ou seja, não há filtro de preço, coloca o valor mínimo e máximo da query de produtos*/
+	if (valorMinGet == '') {
+		valorMinRange = precoMin;
+	} else {
+		valorMinRange = valorMinGet;
+	}
+	if (valorMaxGet == '') {
+		valorMaxRange = precoMax;
+	} else {
+		valorMaxRange = valorMaxGet;
+	}
+	/*Constroi o slider baseado nos arquivos js e css que são inseridos no core-header.php*/
+	jQuery( "#slider-range" ).slider({
+		range: true,
+		step: 1,
+		min: precoMin,
+		max: precoMax,
+		values: [ valorMinRange, valorMaxRange ],
+		slide: function( event, ui ) {
+			jQuery( "#amountMin" ).val(ui.values[ 0 ]);
+			jQuery( "#amountMax" ).val(ui.values[ 1 ]);
+			precoMinFiltro = ui.values[ 0 ];
+			precoMaxFiltro = ui.values[ 1 ];
+		}
+	});
+	/*Popula o input com os valores iniciais*/
+	jQuery( "#amountMin" ).val(jQuery( "#slider-range" ).slider( "values", 0 ));
+	jQuery( "#amountMax" ).val(jQuery( "#slider-range" ).slider( "values", 1 ));
+	/*Alterando os inputs também altera o slider*/
+	var precoInputMin, precoInputMax = 0;
+	jQuery("#amountMin, #amountMax").on('input', function () {
+		/*Tranforma em decimal para poder comparar*/
+		precoInputMin = parseInt(jQuery('#amountMin').val(), 10);
+		precoInputMax = parseInt(jQuery('#amountMax').val(), 10);
+		jQuery( "#slider-range" ).slider("option", "values", [precoInputMin, precoInputMax]);
+		precoMinFiltro = precoInputMin;
+		precoMaxFiltro = precoInputMax;
+	});
+	/*Quando clica fora de algum dos inputs, analisa se o menor é maior que o maior ou vice-versa e corrige*/
+	jQuery("#amountMin").change(function () {
+		/*Tranforma em decimal para poder comparar*/
+		precoInputMin = parseInt(jQuery('#amountMin').val(), 10);
+		precoInputMax = parseInt(jQuery('#amountMax').val(), 10);
+		/*O menor é maior que o maior*/
+		if (precoInputMin > precoInputMax) {
+			/*O menor é maior que o máximo do range, se sim, volta ao valor mínimo, se não, seta o maior para o máximo do range*/
+			if (precoInputMin > precoMax) {
+				precoInputMin = precoMin;
+				jQuery( "#amountMin" ).val(precoMin);
+			} else {
+				precoInputMax = precoMax;
+				jQuery( "#amountMax" ).val(precoMax);
+			}
+		} else if (precoInputMin < precoMin) { /*O menor é menor que o mínimo, então tranforma ele no mínimo*/
+			precoInputMin = precoMin;
+			jQuery( "#amountMin" ).val(precoMin);
+		}
+		jQuery( "#slider-range" ).slider("option", "values", [precoInputMin, precoInputMax]);
+		precoMinFiltro = precoInputMin;
+		precoMaxFiltro = precoInputMax;
+	});
+	jQuery("#amountMax").change(function () {
+		/*Tranforma em decimal para poder comparar*/
+		precoInputMin = parseInt(jQuery('#amountMin').val(), 10);
+		precoInputMax = parseInt(jQuery('#amountMax').val(), 10);
+		/*O maior é menor que o menor*/
+		if (precoInputMax < precoInputMin) {
+			/*O maior é menor que o mínimo do range, sem sim, volta ele ao máximo, se não, seta o menor para o mínimo do range*/
+			if (precoInputMax < precoMin) {
+				precoInputMax = precoMax;
+				jQuery( "#amountMax" ).val(precoMax);
+			} else {
+				precoInputMin = precoMin;
+				jQuery( "#amountMin" ).val(precoMin);
+			}
+		} else if (precoInputMax > precoMax) { /*O maior é maior que o máximo, então tranforma ele no máximo*/
+			precoInputMax = precoMax;
+			jQuery( "#amountMax" ).val(precoMax);
+		}
+		jQuery( "#slider-range" ).slider("option", "values", [precoInputMin, precoInputMax]);
+		precoMinFiltro = precoInputMin;
+		precoMaxFiltro = precoInputMax;
+	});
+	/*Função executada quando clica no botão APLICAR do filtro de preço*/
+	function filtrarComPrecos(){
+		window.location.href = '?areaAtuacao=' + areaAtuacaoGet + '&ordemPreco=' + ordemPrecoGet + '&valorMin=' + precoMinFiltro + '&valorMax=' + precoMaxFiltro + '&cpuColecao=' + cpuColecaoGetString + '&vga=' + vgaGetString + '&ssd=' + ssdGetString + '&ram=' + ramGetString;
+	};
+	/*Ordem*/
+	jQuery('#seletorOrdem').on('change', function() {
+		if (this.value == "DESC") {
+			window.location.href = '?areaAtuacao=' + areaAtuacaoGet + '&ordemPreco=DESC&valorMin=' + valorMinGet + '&valorMax=' + valorMaxGet + '&cpuColecao=' + cpuColecaoGetString + '&vga=' + vgaGetString + '&ssd=' + ssdGetString + '&ram=' + ramGetString;
+		} else {
+			window.location.href = '?areaAtuacao=' + areaAtuacaoGet + '&ordemPreco=ASC&valorMin=' + valorMinGet + '&valorMax=' + valorMaxGet + '&cpuColecao=' + cpuColecaoGetString + '&vga=' + vgaGetString + '&ssd=' + ssdGetString + '&ram=' + ramGetString;
+		}
+	});
+}
+
+/*Página Comparação*/
+if (document.body.classList.contains('page-template-template-comparacao')){
+	jQuery(document).ready(function(){
+		/*Componentes com mesma altura para simular tabela*/
+		var highestBox = 0;
+		jQuery('.processador').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.processador').height(highestBox);
+		var highestBox = 0;
+		jQuery('.placa-mae').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.placa-mae').height(highestBox);
+		var highestBox = 0;
+		jQuery('.placa-de-video').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.placa-de-video').height(highestBox);
+		var highestBox = 0;
+		jQuery('.memoria-ram').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.memoria-ram').height(highestBox);
+		var highestBox = 0;
+		jQuery('.armazenamento-ssd').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.armazenamento-ssd').height(highestBox);
+		var highestBox = 0;
+		jQuery('.armazenamento-hdd').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.armazenamento-hdd').height(highestBox);
+		var highestBox = 0;
+		jQuery('.energia').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.energia').height(highestBox);
+		var highestBox = 0;
+		jQuery('.refrigeracao').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.refrigeracao').height(highestBox);
+		var highestBox = 0;
+		jQuery('.gabinete').each(function(){  
+			if(jQuery(this).height() > highestBox){  
+				highestBox = jQuery(this).height();
+			}
+		});    
+		jQuery('.gabinete').height(highestBox);
+	});
+	/*Remover máquina da comparação*/
+	function remover_maquina(id){
+		var idMaquina = id;
+		var url = window.location.href;
+		url = url.replace(idMaquina, "");
+		window.location.href = url;
+	};
+	/*Nome e preço acompanha scroll + botões para controle do scroll horizontal*/
+	if (botoesScroll == 1) {
+		document.getElementById('scrollDireita').onclick = function () {
+			document.getElementById('comparacao-div').scrollLeft += 150;
+		};
+		document.getElementById('scrollEsquerda').onclick = function () {
+			document.getElementById('comparacao-div').scrollLeft -= 150;
+		};
+	}
+	var elementos = jQuery('.infos-barra');
+	var elemento = elementos[0];
+	var elementoUltimo = elementos.slice(-1);
+	var elementoPosicao = elemento.offsetTop;
+	var elementoLargura = elemento.offsetWidth;
+	var elementosFinais = jQuery('.caracteristica.armazenamento-hdd');
+	var elementoFinal = elementosFinais[0];
+	var elementoFinalPosicao = elementoFinal.offsetTop;
+	var preechimentos = jQuery('.infos-barra-preenchimento');
+	var preechimentosAltura = elemento.offsetHeight;
+	var posicaoEsquerda = document.getElementById("comparacao-div").scrollLeft;
+	var maiorAltura = 0;
+	var larguraDiv = document.getElementById("comparacao-div").scrollWidth;
+	var larguraDiv = Number(larguraDiv);
+	var larguraTela = window.screen.width;
+	var larguraTela = Number(larguraTela) - 17;
+	jQuery(window).scroll(function(e){ 
+		if (window.scrollY > elementoPosicao && window.scrollY < elementoFinalPosicao){
+			elementos.addClass('fixado');
+			elementos.css({'top': '0'});
+			elementos.css({'width': elementoLargura + 24});
+			elementoUltimo.css({'width': elementoLargura});
+			for(let i = 0; i < elementos.length; i = i + 1 ) {
+				posicaoEsquerda = document.getElementById('comparacao-div').scrollLeft;
+				elementos[i].style.transform = 'translate(-'+ posicaoEsquerda +'px)';
+				if(elementos[i].offsetHeight > maiorAltura){  
+					maiorAltura = elementos[i].offsetHeight;
+				}
+			}
+			elementos.css({'height':maiorAltura});
+			preechimentos.css({'height': preechimentosAltura});
+			if (botoesScroll == 1) {
+				if (larguraDiv > larguraTela) {
+					jQuery('.botao-scroll-horizontal').addClass('mostra');
+				}
+			}
+		} else {
+			elementos.removeClass('fixado');
+			elementos.css({'top': elementoPosicao});
+			elementos.css({'width': 'auto'});
+			elementos.css({'transform': 'translate(0px)'});
+			elementos.css({'height': 'auto'});
+			preechimentos.css({'height': '0'});
+			if (botoesScroll == 1) {
+				jQuery('.botao-scroll-horizontal').removeClass('mostra');
+			}
+		}
+	});
+	jQuery('#comparacao-div').on('scroll', function (e) {
+		if (window.scrollY > elementoPosicao && window.scrollY < elementoFinalPosicao){
+			for(let i = 0; i < elementos.length; i = i + 1 ) {
+				posicaoEsquerda = document.getElementById('comparacao-div').scrollLeft;
+				elementos[i].style.transform = 'translate(-'+ posicaoEsquerda +'px)';
+			}
+		} else {
+			elementos.css({'transform': 'translate(0px)'});
+		}
+	});
+}
+
+/*Seção Na mídia*/
+if (jQuery('#carrossel-na-midia').length > 0) {
+	/*Todos os itens do carrossel com a mesma altura*/
+	jQuery ('#carrossel-na-midia .carousel-inner').each(function(){
+		/*Para salvar o mais alto*/
+		var highestBox = 0;
+		/*Seleciona os elementos do loop*/
+		jQuery('.carousel-item', this).each(function(){
+			/*Guarda se for mais alto*/
+			if(jQuery(this).height() > highestBox) {
+				highestBox = jQuery(this).height();
+			}
+		});
+		/*Seta a altura em todos os elementos do loop*/
+		jQuery('.carousel-item',this).height(highestBox);
+	});
+};
+
+/*Seção Softwares nas páginas de linha*/
+if (jQuery('#linha-barras-desempenho-e-softwares').length > 0) {
+	/*Todos os itens com a mesma altura*/
+	jQuery('#linha-barras-desempenho-e-softwares .tab-content').each(function(){
+		/*Para salvar o mais alto*/
+		var highestBox = 0;
+		/*Seleciona os elementos do loop*/
+		jQuery('.tab-pane', this).each(function(){
+			/*Guarda se for mais alto*/
+			if(jQuery(this).height() > highestBox) {
+				highestBox = jQuery(this).height();
+			}
+		});
+		/*Seta a altura em todos os elementos do loop*/
+		jQuery('.tab-pane',this).height(highestBox);
+	});
+};
+
+/*Seção depoimentos*/
+if (jQuery('#depoimentos').length > 0) {
+	/*Todos os itens com a mesma altura*/
+	jQuery('#depoimentos .carousel-inner').each(function(){
+		/*Para salvar o mais alto*/
+		var highestBox = 0;
+		/*Seleciona os elementos do loop*/
+		jQuery('.carousel-item', this).each(function(){
+			/*Guarda se for mais alto*/
+			if(jQuery(this).height() > highestBox) {
+				highestBox = jQuery(this).height();
+			}
+		});
+		/*Seta a altura em todos os elementos do loop*/
+		jQuery('.carousel-item',this).height(highestBox);
+	});
+};
