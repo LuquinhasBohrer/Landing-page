@@ -1,3 +1,6 @@
+.titulo-principal{
+  font-size: 50px;
+}
 
 /*Informações sobre o pc*/
 .informações-pc h2 {
@@ -39,7 +42,6 @@
 @media (max-width: 999px) {
   .informações-pc h2 {
     display: flex;
-    flex-direction: ;
   }
 }
 
@@ -244,7 +246,7 @@ footer {
   background-color: #000000;
   padding: 50px 0px;
   align-items: center;
-  
+  width: 100%;
 }
 
 footer ul {
@@ -272,7 +274,12 @@ footer p {
   font-size: 22px;
 }
 
+.midias a:hover{
+  padding: 15px;
+}
+
 @media (max-width: 999px) {
   footer {
-    margin-top: 400px;
+    margin-top: 800px;
   }
+}
