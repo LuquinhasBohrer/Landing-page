@@ -56,7 +56,19 @@
     align-items: center;
     justify-content: center;
   }
-
+  .informações-pc ul {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .informações-pc ul li img {
+    width: 30px;
+    height: 30px;
+  }
+  .informações-pc hr {
+    width: 150px;
+    margin-left: 150px;
+  }
 }
 
 
@@ -181,7 +193,7 @@
   font-size: 17px;
   float: right;
   margin-top: 50px;
-  margin-right: 300px;
+  margin-right: 250px;
   font-weight: bold;
   border: #444444;
   pointer-events: painted;
@@ -191,7 +203,6 @@
   height: 20px;
   margin-right: 5px;
 }
-
 .informações-pc a:hover{
   font-size: 19px;
   height: 75px;
@@ -200,11 +211,103 @@
   font-style: normal;
   pointer-events: stroke;
 }
+@media (max-width: 999px) {
+  .comprar {
+    margin-right: 96px;
+  }
+}
+
+/*iformações das peças*/
+.pc section{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -300px;
+  float: left;
+}
+}
+
+.pc section:nth-child(1){
+  color: #fff;
+}
+
+.pc section:nth-child(2){
+  color: #fff;
+  background: #fff;
+}
+
+.pc section:nth-child(3){
+  color: #fff;
+}
+
+.pc section:nth-child(4){
+  color: #fff;
+  background: #fff;
+}
+
+.pc section .container{
+  margin: 100px;
+}
+
+.pc section h1{
+  font-size: 60px;
+}
+
+.pc section h2{
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pc section .cards{
+  display: flex;
+}
+
+section .cards .text-card{
+  background: #3d3d3d;
+  margin: 20px;
+  padding: 20px;
+}
+
+.pc section .cards .text-card h3{
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 999px){
+  .pc section {
+    margin-top: 50px;
+  }
+  .pc section h1{
+    font-size: 40px;
+    margin-top: 150px;
+  }
+
+  .pc section .cards{
+    flex-direction: column;
+    margin-top: 150px;
+  }
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.reveal.active{
+  transform: translateY(0px);
+  opacity: 1;
+}
 
 
 /*Footer*/
 footer {
-  margin-top: 1200px;
+  margin-top: 1500px;
   display: flex;
   flex-direction: column;
   background-color: #000000;
@@ -244,6 +347,6 @@ footer p {
 
 @media (max-width: 999px) {
   footer {
-    margin-top: 800px;
+    margin-top: 1850px;
   }
 }

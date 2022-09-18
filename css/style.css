@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -139,6 +141,8 @@ main {
 .mobile-menu.active .line3 {
   transform: rotate(45deg) translate(-5px, -7px);
 }
+
+
 
 /*Título Principal*/
 .titulo-principal {
