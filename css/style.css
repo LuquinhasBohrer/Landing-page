@@ -85,6 +85,7 @@ main {
 @media (max-width: 999px) {
   body {
     overflow-x: hidden;
+    
   }
 
   .nav-list {
