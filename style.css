@@ -211,6 +211,7 @@
   font-style: normal;
   pointer-events: stroke;
 }
+
 @media (max-width: 999px) {
   .comprar {
     margin-right: 96px;
@@ -223,7 +224,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -300px;
+  margin-top: -320px;
   float: left;
 }
 
@@ -247,7 +248,7 @@
 }
 
 .pc section .container{
-  margin: 100px;
+  margin: 150px;
 }
 
 .pc section h1{
@@ -262,6 +263,7 @@
 
 .pc section .cards{
   display: flex;
+  margin-left: -80px;
 }
 
 
@@ -294,7 +296,7 @@
 @media (max-width: 999px){
   .pc section {
     margin-top: 50px;
-    margin-left: 0px;
+    margin-left: -60px;
   }
   .pc section h1{
     font-size: 40px;
@@ -318,6 +320,11 @@
 .reveal.active{
   transform: translateY(0px);
   opacity: 1;
+}
+
+.container h2{
+  margin-top: 30px;
+  font-size: 30px;
 }
 
 
