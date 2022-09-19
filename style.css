@@ -308,14 +308,15 @@
    .pc section h2{
     font-size: 40px;
     margin-top: 50px;
-    float: left;
-    margin-left: -75px;
+  
+    margin-left: -140px;
   } 
 
   .pc section .cards{
-    float: left;
+    margin-left: -140px;
     flex-direction: column;
     margin-top: 100px;
+
   }
 }
 
