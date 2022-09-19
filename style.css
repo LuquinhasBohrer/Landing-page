@@ -66,8 +66,9 @@
     height: 30px;
   }
   .informações-pc hr {
+    float: none;
     width: 150px;
-    margin-left: 150px;
+    margin-left: 165px;
   }
 }
 
@@ -186,7 +187,7 @@
   width: 300px;
   height: 70px;
   border-radius: 1000px;
-  background: linear-gradient(to bottom, rgb(97, 21, 21), rgb(148, 26, 26));
+  background: linear-gradient(to bottom, rgb(97, 21, 21), rgb(189, 65, 65));
   color: #fff;
   align-items: center;
   justify-content: center;
@@ -196,14 +197,13 @@
   margin-right: 250px;
   font-weight: bold;
   border: #444444;
-  pointer-events: painted;
 }
 .comprar img {
   width: 20px;
   height: 20px;
   margin-right: 5px;
 }
-.informações-pc a:hover{
+.comprar:hover {
   font-size: 19px;
   height: 75px;
   padding: 10px;
@@ -226,10 +226,10 @@
   margin-top: -300px;
   float: left;
 }
-}
+
 
 .pc section:nth-child(1){
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 .pc section:nth-child(2){
@@ -264,22 +264,37 @@
   display: flex;
 }
 
-section .cards .text-card{
-  background: #3d3d3d;
+
+
+.pc section .cards .text-card{
+  background: #808080;
   margin: 20px;
   padding: 20px;
+  max-width: 250px;
+  padding: 1rem;
+  position: relative;
+  background: linear-gradient(to right, red, rgb(252, 102, 102));
+  border-radius: 30px;
+  padding: 3rem;
+}
+.pc section .content{
+  border-radius: 20px;
+  background: #222;
+  color: white;
+  padding: 2.5rem;
 }
 
 .pc section .cards .text-card h3{
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: -30px;
 }
 
 @media (max-width: 999px){
   .pc section {
     margin-top: 50px;
+    margin-left: 0px;
   }
   .pc section h1{
     font-size: 40px;

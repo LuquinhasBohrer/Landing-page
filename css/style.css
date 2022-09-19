@@ -91,6 +91,7 @@ main {
   }
 
   .nav-list {
+    z-index: 3;
     position: absolute;
     top: 8vh;
     right: 0;
