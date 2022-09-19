@@ -298,11 +298,13 @@
   .pc section {
     margin-top: 50px;
     margin-left: -60px;
+    text-align: center;
   }
-  .pc section h1{
+
+  /* .pc section h2{
     font-size: 40px;
     margin-top: 150px;
-  }
+  } */
 
   .pc section .cards{
     flex-direction: column;
@@ -312,11 +314,11 @@
 }
 
 .reveal{
-  position: relative;
+  /* position: relative; */
   transform: translateY(150px);
   opacity: 0;
   transition: all 2s ease;
-  /* margin-left: 0px; */
+  margin-left: 0px;
 }
 
 .reveal.active{
@@ -325,9 +327,9 @@
 }
 
 .container h2{
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 30px;
-  margin-left: -90px;
+  margin-left: -258px;
 }
 
 
