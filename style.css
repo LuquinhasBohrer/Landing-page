@@ -304,6 +304,7 @@
   .pc section .cards{
     flex-direction: column;
     margin-top: 150px;
+    margin-right: 150px;
   }
 }
 
