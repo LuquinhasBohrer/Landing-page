@@ -158,7 +158,7 @@
 
 @media (max-width: 999px) {
   .img-slider {
-    margin-left: 75px;
+    margin-left: 50px;
     float: none;
     width: 350px;
     height: 470px;
@@ -203,7 +203,7 @@
   height: 20px;
   margin-right: 5px;
 }
-.comprar:hover {
+.comprar a:hover {
   font-size: 19px;
   height: 75px;
   padding: 10px;
@@ -224,8 +224,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -320px;
+  margin-top: -200px;
   float: left;
+  margin-left: 50px;
 }
 
 
@@ -259,6 +260,9 @@
   font-size: 40px;
   text-align: center;
   text-transform: uppercase;
+  margin-left: 0px;
+  margin-bottom: 50px;
+  margin-right: 20px;
 }
 
 .pc section .cards{
@@ -297,19 +301,20 @@
 @media (max-width: 999px){
   .pc section {
     margin-top: 50px;
-    margin-left: -60px;
     text-align: center;
   }
 
-  /* .pc section h2{
+   .pc section h2{
     font-size: 40px;
-    margin-top: 150px;
-  } */
+    margin-top: 50px;
+    float: left;
+    margin-left: -75px;
+  } 
 
   .pc section .cards{
+    float: left;
     flex-direction: column;
-    margin-top: 150px;
-    margin-right: 150px;
+    margin-top: 100px;
   }
 }
 
